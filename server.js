@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const gameResultsRouter = require('./routes/gameResults');
+const gameResultsRouter = require('./src/authorization/routes/gameResults');
 
 dotenv.config();
 
@@ -21,8 +21,8 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Маршруты
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/game', require('./routes/game'));
+app.use('/api/auth', require('./src/authorization/routes/auth'));
+app.use('/api/game', require('./src/authorization/routes/game'));
 app.use('/api/game-results', gameResultsRouter);
 
 app.listen(PORT, () => {
