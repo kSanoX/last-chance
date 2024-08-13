@@ -5,11 +5,12 @@ const Register: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-
+  const baseURL = process.env.REACT_APP_HOST || 'http://localhost:5000';
+  
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post(`${baseURL}/api/auth/register`, {
         username,
         password,
       });

@@ -9,11 +9,12 @@ const Login: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const { setAuth, setUsername: setAuthUsername } = useAuth();
   const navigate = useNavigate();
+  const baseURL = process.env.REACT_APP_HOST || 'http://localhost:5000';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+      const res = await axios.post(`${baseURL}/api/auth/login`, { username, password });
       localStorage.setItem('token', res.data.token);
       setAuth(true);
       setAuthUsername(username); // Устанавливаем имя пользователя

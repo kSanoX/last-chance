@@ -21,6 +21,7 @@ const Game: React.FC<GameProps> = ({ difficulty }) => {
   const [showMines, setShowMines] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState<string | null>(null);
   const { username } = useAuth();
+  const baseURL = process.env.REACT_APP_HOST || 'http://localhost:5000';
 
   const init = (rows: number, cols: number, mines: number) => {
     let squares = createBoard(rows, cols);
@@ -66,7 +67,7 @@ const Game: React.FC<GameProps> = ({ difficulty }) => {
 
   const saveGameResult = async (username: string, time: number, difficulty: string) => {
     try {
-      await axios.post('http://localhost:5000/api/game-results', {
+      await axios.post(`${baseURL}/api/game-results`, {
         username,
         time,
         difficulty

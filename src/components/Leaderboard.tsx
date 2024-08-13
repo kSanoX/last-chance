@@ -14,11 +14,12 @@ const Leaderboard: React.FC = () => {
   const [easyResults, setEasyResults] = useState<GameResult[]>([]);
   const [mediumResults, setMediumResults] = useState<GameResult[]>([]);
   const [hardResults, setHardResults] = useState<GameResult[]>([]);
+  const baseURL = process.env.REACT_APP_HOST || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/game-results');
+        const response = await axios.get(`${baseURL}/api/game-results`);
         setEasyResults(response.data.easyResults);
         setMediumResults(response.data.mediumResults);
         setHardResults(response.data.hardResults);
